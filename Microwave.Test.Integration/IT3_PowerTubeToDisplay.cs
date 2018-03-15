@@ -3,18 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MicrowaveOvenClasses.Boundary;
+using MicrowaveOvenClasses.Interfaces;
+using NSubstitute;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
 
 namespace Microwave.Test.Integration
 {
     [TestFixture]
-    public class SomeINtegrationTest
+    public class IT3_PowerTubeToDisplay
     {
+        private IOutput _output;
+        private IPowerTube _uut;
+
         [SetUp]
         public void Setup()
         {
-            // Initialize objects that are needed
+            _output = Substitute.For<IOutput>();
+            _uut = new PowerTube(_output);
+            
         }
     }
 }
