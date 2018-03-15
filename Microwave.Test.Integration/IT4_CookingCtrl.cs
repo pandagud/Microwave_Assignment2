@@ -25,9 +25,9 @@ namespace Microwave.Test.Integration
         public void Setup()
         {
             _output = Substitute.For<IOutput>();
-            _powerTube = Substitute.For<IPowerTube>();
+            _powerTube = new PowerTube(_output);
             _timer = new Timer();
-            _display = Substitute.For<IDisplay>();
+            _display = new Display(_output);
    
             _uut = new CookController(_timer,_display,_powerTube);
             
@@ -38,7 +38,9 @@ namespace Microwave.Test.Integration
         public void CookcontrollerStartCooking(int power, int time)
         {
             _uut.StartCooking(power,time);
-            _powerTube.Received().TurnOn(power);
+            _output.Received().OutputLine($"PowerTube works with {power} %");
+            Assert.AreEqual(time, _timer.TimeRemaining);
+            
            
             
         }
@@ -48,10 +50,13 @@ namespace Microwave.Test.Integration
         {
             _uut.StartCooking(power,time);
             _uut.Stop();
-            _powerTube.Received().TurnOff();
+            _output.Received().OutputLine($"PowerTube turned off");
+            // Hvordan tester vi stopfuction i Timer classen. 
             
 
         }
+
+       
 
 
     }

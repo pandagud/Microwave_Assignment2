@@ -57,6 +57,7 @@
     <Compile Include="IT2_DisplayToOutput.cs" />
     <Compile Include="IT3_PowerTubeToDisplay.cs" />
     <Compile Include="IT4_CookingCtrl.cs" />
+    <Compile Include="IT5_UserInterface.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
