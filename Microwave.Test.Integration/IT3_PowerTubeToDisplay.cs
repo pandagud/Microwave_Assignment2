@@ -24,5 +24,39 @@ namespace Microwave.Test.Integration
             _uut = new PowerTube(_output);
             
         }
+
+        #region PowerTube
+
+
+
+
+        [TestCase(200)]
+        public void PowerTubeToDisplayTurnOnArgumentOutOfRagenException(int power)
+        {
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => _uut.TurnOn(power));
+
+
+
+        }
+        [TestCase(20)]
+        public void PowerTubeToDisplayTurnOnApplicationException(int power)
+        {
+            _uut.TurnOn(power);
+
+            Assert.Throws<ApplicationException>(() => _uut.TurnOn(power));
+
+        }
+        [TestCase(20)]
+        public void PowerTubeToDisplayTurnOn(int power)
+        {
+            _uut.TurnOn(power);
+
+            _output.Received().OutputLine($"PowerTube works with {power} %");
+
+        }
+
+        #endregion
+
     }
 }

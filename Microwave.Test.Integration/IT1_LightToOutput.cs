@@ -17,13 +17,20 @@ namespace Microwave.Test.Integration
         private IOutput _output;
         private ILight _uut;
 
+
         [SetUp]
         public void Setup()
         {
             _output = Substitute.For<IOutput>();
             _uut = new Light(_output);
+       
         }
 
+        #region Light
+
+        
+
+            
         [Test]
         public void LightOn_Output()
         {
@@ -34,10 +41,15 @@ namespace Microwave.Test.Integration
         [Test]
         public void LightOff_Output()
         {
+            _uut.TurnOn();
             _uut.TurnOff();
             _output.Received().OutputLine("Light is turned off");
 
         }
+        #endregion
 
+
+
+   
     }
 }
