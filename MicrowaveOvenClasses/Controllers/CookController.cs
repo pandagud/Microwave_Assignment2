@@ -23,6 +23,7 @@ namespace MicrowaveOvenClasses.Controllers
         {
             UI = ui;
         }
+        //Uendelig afhængighed ved brug af Constructor med UI. Burde omskrives.
 
         public CookController(
             ITimer timer,
@@ -35,6 +36,11 @@ namespace MicrowaveOvenClasses.Controllers
 
             timer.Expired += new EventHandler(OnTimerExpired);
             timer.TimerTick += new EventHandler(OnTimerTick);
+        }
+
+        public void SetInterface(IUserInterface ui)
+        {
+            UI = ui;
         }
 
         public void StartCooking(int power, int time)

@@ -56,8 +56,10 @@
     <Compile Include="IT1_LightToOutput.cs" />
     <Compile Include="IT2_DisplayToOutput.cs" />
     <Compile Include="IT3_PowerTubeToDisplay.cs" />
-    <Compile Include="IT4_CookingCtrl.cs" />
-    <Compile Include="IT5_UserInterface.cs" />
+    <Compile Include="IT4_CookingCtrlToDisplay_Timer_PowerTube.cs" />
+    <Compile Include="IT5_ButtonToUserInterface.cs" />
+    <Compile Include="IT7_UserInterfaceToCookCtrl_Display_Light.cs" />
+    <Compile Include="IT6_DoorToUserInterface.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

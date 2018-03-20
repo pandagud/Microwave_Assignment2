@@ -12,16 +12,17 @@ using NUnit.Framework.Internal;
 
 namespace Microwave.Test.Integration
 {
-    [TestFixture]
-    public class IT5_UserInterface
+    [TestFixture()]
+    public class IT5_ButtonToUserInterface
     {
         private IOutput _output;
         private ILight _light;
+        private IDoor _driverDoor;
+        private UserInterface _userInterface;
         private IPowerTube _powerTube;
         private ITimer _timer;
         private IDisplay _display;
         private ICookController cookController;
-        private IUserInterface _userInterface;
         private IButton _powerbutton;
         private IButton _timerButton;
         private IButton _startCancelButton;
@@ -30,34 +31,26 @@ namespace Microwave.Test.Integration
         [SetUp]
         public void Setup()
         {
+            _driverDoor = Substitute.For<IDoor>();
+            _light = Substitute.For<ILight>();
             _output = Substitute.For<IOutput>();
             _powerTube = Substitute.For<IPowerTube>();
             _timer = Substitute.For<ITimer>();
-            _display = new Display(_output);
-            _powerbutton = Substitute.For<IButton>();
-            _timerButton = Substitute.For<IButton>();
-            _startCancelButton = Substitute.For<IButton>();
-            _door = Substitute.For<IDoor>();
+            _display = Substitute.For<IDisplay>();
+            _powerbutton = new Button();
+            _timerButton = new Button();
+            _startCancelButton = new Button();
             _light = Substitute.For<ILight>();
-            cookController = new CookController(_timer, _display, _powerTube);
-            _userInterface = new UserInterface(_powerbutton,_timerButton,_startCancelButton,_door,_display,_light,cookController);
-            cookController = new CookController(_timer, _display, _powerTube,_userInterface);
+            cookController = Substitute.For<ICookController>();
+            _userInterface = new UserInterface(_powerbutton, _timerButton, _startCancelButton, _driverDoor, _display, _light, cookController);
             
         }
 
         [Test]
         public void OnPowerPressed()
         {
-           _userInterface.OnPowerPressed(_powerbutton, System.EventArgs.Empty);
-           _output.Received().OutputLine($"Display shows: {50} W");
-        }
-       
-       [Test]
-        public void OnTimePressed()
-        {
             _userInterface.OnPowerPressed(_powerbutton, System.EventArgs.Empty);
-            _userInterface.OnTimePressed(_timerButton, System.EventArgs.Empty);
-            _output.Received().OutputLine($"Display shows: {1:D2}:{0:D2}");
+
         }
     }
 }

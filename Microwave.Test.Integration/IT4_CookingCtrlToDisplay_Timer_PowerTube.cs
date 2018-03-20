@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using MicrowaveOvenClasses.Boundary;
 using MicrowaveOvenClasses.Controllers;
@@ -9,17 +10,19 @@ using MicrowaveOvenClasses.Interfaces;
 using NSubstitute;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
+using Timer = MicrowaveOvenClasses.Boundary.Timer;
 
 namespace Microwave.Test.Integration
 {
     [TestFixture]
-    public class IT4_CookingCtrl
+    public class IT4_CookingCtrlToDisplay_Timer_PowerTube
     {
         private IOutput _output;
         private IPowerTube _powerTube;
         private ITimer _timer;
         private IDisplay _display;
         private ICookController _uut;
+        private UserInterface _userInterface;
 
         [SetUp]
         public void Setup()
@@ -38,7 +41,7 @@ namespace Microwave.Test.Integration
         public void CookcontrollerStartCooking(int power, int time)
         {
             _uut.StartCooking(power,time);
-            _output.Received().OutputLine($"PowerTube works with {power} %");
+            _output.Received().OutputLine($"PowerTube works with 2 %");
             Assert.AreEqual(time, _timer.TimeRemaining);
             
            
@@ -49,14 +52,26 @@ namespace Microwave.Test.Integration
         public void CookcontrollerStopCooking(int power, int time)
         {
             _uut.StartCooking(power,time);
+
             _uut.Stop();
             _output.Received().OutputLine($"PowerTube turned off");
             // Hvordan tester vi stopfuction i Timer classen. 
             
 
         }
+        [TestCase(20, 1)]
+        public void CookcontrollerSelfStopCooking(int power, int time)
+        {
+            _uut.StartCooking(power, time);
+            Thread.Sleep(1200);
+         
+            _output.Received().OutputLine($"PowerTube turned off");
+            // Hvordan tester vi stopfuction i Timer classen. 
 
-       
+
+        }
+
+
 
 
     }

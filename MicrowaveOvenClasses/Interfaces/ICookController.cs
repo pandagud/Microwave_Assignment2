@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MicrowaveOvenClasses.Controllers;
 
 namespace MicrowaveOvenClasses.Interfaces
 {
@@ -10,5 +11,6 @@ namespace MicrowaveOvenClasses.Interfaces
     {
         void StartCooking(int power, int time);
         void Stop();
+        void SetInterface(IUserInterface ui);
     }
 }
