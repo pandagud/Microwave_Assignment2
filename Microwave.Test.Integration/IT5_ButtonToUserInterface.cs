@@ -12,7 +12,7 @@ using NUnit.Framework.Internal;
 
 namespace Microwave.Test.Integration
 {
-    [TestFixture()]
+    [TestFixture]
     public class IT5_ButtonToUserInterface
     {
         private IOutput _output;
@@ -47,9 +47,67 @@ namespace Microwave.Test.Integration
         }
 
         [Test]
-        public void OnPowerPressed()
+        public void OnPowerButtonPressed()
         {
             _userInterface.OnPowerPressed(_powerbutton, System.EventArgs.Empty);
+            _display.Received().ShowPower(50);
+            // Laver ikke for den anden state da det er den samme metode som bliver anvendt. Tror det er argument nok. ellers er det nemt nok lige at lave en testcase for det.
+        }
+        [Test]
+        public void OnTimerButtonPressed()
+        {
+            _userInterface.OnPowerPressed(_powerbutton, System.EventArgs.Empty);
+            _userInterface.OnTimePressed(_timerButton, System.EventArgs.Empty);
+            _display.Received().ShowTime(1,0);
+
+        }
+        [Test]
+        public void OnStartCancelButtonPressed_StateSetPower()
+        {
+            _userInterface.OnPowerPressed(_powerbutton, System.EventArgs.Empty);
+            _userInterface.OnStartCancelPressed(_startCancelButton, System.EventArgs.Empty);
+            _light.Received().TurnOff();
+
+        }
+        [Test]
+        public void OnStartCancelButtonPressed_StateSetTime()
+        {
+            _userInterface.OnPowerPressed(_powerbutton, System.EventArgs.Empty);
+            _userInterface.OnTimePressed(_timerButton, System.EventArgs.Empty);
+            _userInterface.OnStartCancelPressed(_startCancelButton, System.EventArgs.Empty);
+            _light.Received().TurnOn();
+
+        }
+        [Test]
+        public void OnStartCancelButtonPressed_StateCOOKING_IntegrationToCookController()
+        {
+            _userInterface.OnPowerPressed(_powerbutton, System.EventArgs.Empty);
+            _userInterface.OnTimePressed(_timerButton, System.EventArgs.Empty);
+            _userInterface.OnStartCancelPressed(_startCancelButton, System.EventArgs.Empty);
+
+            cookController.Received().StartCooking(50, 60);
+
+
+        }
+        [Test]
+        public void OnStartCancelButtonPressed_StateCOOKING_IntegrationToLight()
+        {
+            _userInterface.OnPowerPressed(_powerbutton, System.EventArgs.Empty);
+            
+            _userInterface.OnStartCancelPressed(_startCancelButton, System.EventArgs.Empty);
+
+           
+            _light.Received().TurnOff();
+           
+
+        }
+        [Test]
+        public void OnStartCancelButtonPressed_StateCOOKING_IntegrationToDisplay()
+        {
+            _userInterface.OnPowerPressed(_powerbutton, System.EventArgs.Empty);
+            _userInterface.OnStartCancelPressed(_startCancelButton, System.EventArgs.Empty);
+
+            _display.Received().Clear();
 
         }
     }
