@@ -25,7 +25,7 @@ namespace Microwave.Test.Integration
         private IButton _powerbutton;
         private IButton _timerButton;
         private IButton _startCancelButton;
-        private IDoor _door;
+       
 
         [SetUp]
         public void Setup()

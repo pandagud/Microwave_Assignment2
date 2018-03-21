@@ -22,7 +22,6 @@ namespace Microwave.Test.Integration
         private ITimer _timer;
         private IDisplay _display;
         private ICookController _uut;
-        private UserInterface _userInterface;
 
         [SetUp]
         public void Setup()
