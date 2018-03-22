@@ -31,6 +31,7 @@ namespace TestApplikation
             var cC = new CookController(timer, display, pt);
             var uI = new UserInterface(pB, tB, scB, door, display, light, cC);
             cC.UI = uI;
+            
 
 
 

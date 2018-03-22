@@ -14,12 +14,9 @@ namespace Microwave.Test.Unit
         private IButton powerButton;
         private IButton timeButton;
         private IButton startCancelButton;
-
         private IDoor door;
-
         private IDisplay display;
         private ILight light;
-
         private ICookController cooker;
 
         [SetUp]

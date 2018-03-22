@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using MicrowaveOvenClasses.Controllers;
 using MicrowaveOvenClasses.Interfaces;
 using NSubstitute;
@@ -82,6 +83,5 @@ namespace Microwave.Test.Unit
 
             powerTube.Received().TurnOff();
         }
-
     }
 }
