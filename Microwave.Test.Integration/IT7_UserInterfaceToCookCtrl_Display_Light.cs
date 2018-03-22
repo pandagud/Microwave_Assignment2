@@ -31,14 +31,14 @@ namespace Microwave.Test.Integration
         public void Setup()
         {
             _output = Substitute.For<IOutput>();
-            _powerTube = Substitute.For<IPowerTube>();
-            _timer = Substitute.For<ITimer>();
+            _powerTube = new PowerTube(_output);
+            _timer = new Timer();
             _display = new Display(_output);
-            _powerbutton = Substitute.For<IButton>();
-            _timerButton = Substitute.For<IButton>();
-            _startCancelButton = Substitute.For<IButton>();
-            _door = Substitute.For<IDoor>();
-            _light = Substitute.For<ILight>();
+            _powerbutton = new Button();
+            _timerButton = new Button();
+            _startCancelButton = new Button();
+            _door = new Door();
+            _light = new Light(_output);
             cookController = new CookController(_timer, _display, _powerTube);
             _userInterface = new UserInterface(_powerbutton,_timerButton,_startCancelButton,_door,_display,_light,cookController);
             cookController.UI = _userInterface;
