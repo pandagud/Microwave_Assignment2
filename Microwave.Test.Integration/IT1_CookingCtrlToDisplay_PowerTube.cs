@@ -15,7 +15,7 @@ using Timer = MicrowaveOvenClasses.Boundary.Timer;
 namespace Microwave.Test.Integration
 {
     [TestFixture]
-    public class IT4_CookingCtrlToDisplay_Timer_PowerTube
+    public class IT1_CookingCtrlToDisplay_PowerTube
     {
         private IOutput _output;
         private IPowerTube _powerTube;
@@ -37,10 +37,10 @@ namespace Microwave.Test.Integration
         }
 
         [TestCase(20,10)]
-        public void CookcontrollerStartCooking(int power, int time)
+        public void CookcontrollerStartCooking(int power, int time) 
         {
             _uut.StartCooking(power,time);
-            _output.Received().OutputLine($"PowerTube works with 2 %");
+            _output.Received().OutputLine($"PowerTube works with 2 %"); // ville fejle hvis de 20 ikke blev omregnet til 2%
             Assert.AreEqual(time, _timer.TimeRemaining);
             
            
@@ -54,7 +54,7 @@ namespace Microwave.Test.Integration
 
             _uut.Stop();
             _output.Received().OutputLine($"PowerTube turned off");
-            // Hvordan tester vi stopfuction i Timer classen. 
+            
             
 
         }
@@ -65,13 +65,7 @@ namespace Microwave.Test.Integration
             Thread.Sleep(1200);
          
             _output.Received().OutputLine($"PowerTube turned off");
-            // Hvordan tester vi stopfuction i Timer classen. 
-
-
+            
         }
-
-
-
-
     }
 }

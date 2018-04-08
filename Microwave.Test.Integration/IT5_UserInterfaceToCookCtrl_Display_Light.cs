@@ -13,7 +13,7 @@ using NUnit.Framework.Internal;
 namespace Microwave.Test.Integration
 {
     [TestFixture]
-    public class IT7_UserInterfaceToCookCtrl_Display_Light
+    public class IT5_UserInterfaceToCookCtrl_Display_Light
     {
         private IOutput _output;
         private ILight _light;
@@ -53,15 +53,15 @@ namespace Microwave.Test.Integration
         [Test]
         public void OnPowerPressed()
         {
-           _userInterface.OnPowerPressed(_powerbutton, System.EventArgs.Empty);
+           _powerbutton.Press();
            _output.Received().OutputLine($"Display shows: {50} W");
         }
        
        [Test]
         public void OnTimePressed()
         {
-            _userInterface.OnPowerPressed(_powerbutton, System.EventArgs.Empty);
-            _userInterface.OnTimePressed(_timerButton, System.EventArgs.Empty);
+            _powerbutton.Press();
+            _timerButton.Press();
             _output.Received().OutputLine($"Display shows: {1:D2}:{0:D2}");
         }
     }

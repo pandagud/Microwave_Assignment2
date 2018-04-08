@@ -13,7 +13,7 @@ using NUnit.Framework.Internal;
 namespace Microwave.Test.Integration
 {
     [TestFixture]
-    public class IT5_ButtonToUserInterface
+    public class IT3_ButtonToUserInterface
     {
         private IOutput _output;
         private ILight _light;
