@@ -36,18 +36,18 @@ namespace Microwave.Test.Integration
 
         }
         
-        [TestCase(20, 1)]
+        [TestCase(20, 60)]
         public void CookcontrollerTimerTestNotStoppedCooking(int power, int time)
         {
             _uut.StartCooking(power,time);
-            Thread.Sleep(900);
+            Thread.Sleep(59000);
             _output.DidNotReceive().OutputLine($"Powertube turned off");
         }
         [TestCase(20, 1)]
         public void CookcontrollerTimerTestStoppedCooking(int power, int time)
         {
             _uut.StartCooking(power, time);
-            Thread.Sleep(1100);
+            Thread.Sleep(61000);
             _output.Received().OutputLine($"PowerTube turned off");
         }
 
