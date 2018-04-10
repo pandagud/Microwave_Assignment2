@@ -15,7 +15,7 @@ using Timer = MicrowaveOvenClasses.Boundary.Timer;
 namespace Microwave.Test.Integration
 {
     [TestFixture]
-    public class IT2_CookingCtrlToDisplay_PowerTube
+    public class IT1_CookingCtrlToTimer
     {
         private IOutput _output;
         private IPowerTube _powerTube;
@@ -27,28 +27,28 @@ namespace Microwave.Test.Integration
         public void Setup()
         {
             _output = Substitute.For<IOutput>();
-            _powerTube = new PowerTube(_output);
+            _powerTube = Substitute.For<IPowerTube>();//new PowerTube(_output);
             _timer = new Timer();
-            _display = new Display(_output);
-   
+            _display = Substitute.For<IDisplay>();  //new Display(_output);
+
             _uut = new CookController(_timer,_display,_powerTube);
             
 
         }
         
-        [TestCase(20, 60)]
+        [TestCase(20, 60)] //sæt 60 ind
         public void CookcontrollerTimerTestNotStoppedCooking(int power, int time)
         {
             _uut.StartCooking(power,time);
             Thread.Sleep(59000);
-            _output.DidNotReceive().OutputLine($"Powertube turned off");
+            _powerTube.DidNotReceive().TurnOff();
         }
-        [TestCase(20, 1)]
+        [TestCase(20, 60)]
         public void CookcontrollerTimerTestStoppedCooking(int power, int time)
         {
             _uut.StartCooking(power, time);
             Thread.Sleep(61000);
-            _output.Received().OutputLine($"PowerTube turned off");
+            _powerTube.Received().TurnOff();
         }
 
 

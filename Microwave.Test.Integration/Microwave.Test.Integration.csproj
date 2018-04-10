@@ -53,8 +53,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IT2_CookingCtrlToTimer.cs" />
-    <Compile Include="IT1_CookingCtrlToDisplay_PowerTube.cs" />
+    <Compile Include="IT1_CookingCtrlToTimer.cs" />
+    <Compile Include="IT2_CookingCtrlToDisplay_PowerTube.cs" />
     <Compile Include="IT3_ButtonToUserInterface.cs" />
     <Compile Include="IT5_UserInterfaceToCookCtrl_Display_Light.cs" />
     <Compile Include="IT4_DoorToUserInterface.cs" />

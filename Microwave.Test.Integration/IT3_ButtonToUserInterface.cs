@@ -32,9 +32,10 @@ namespace Microwave.Test.Integration
         public void Setup()
         {
             _driverDoor = Substitute.For<IDoor>();
-            _light = Substitute.For<ILight>();
+            
             _output = Substitute.For<IOutput>();
             _powerTube = Substitute.For<IPowerTube>();
+            _light = Substitute.For<ILight>();
             _timer = Substitute.For<ITimer>();
             _display = Substitute.For<IDisplay>();
             _powerbutton = new Button();
